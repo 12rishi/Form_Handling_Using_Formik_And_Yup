@@ -1,10 +1,13 @@
+import { Suspense, lazy } from "react";
 import "./App.css";
-import Form from "./component/Form";
 
 function App() {
+  const Form = lazy(() => import("./component/Form"));
   return (
     <>
-      <Form />
+      <Suspense fallback={<div>Loading.............</div>}>
+        <Form />
+      </Suspense>
     </>
   );
 }

@@ -1,28 +1,28 @@
 import React from "react";
 import { useFormik } from "formik";
-import { registrationSchema } from "../schemas";
+import { validateRegistration } from "../schema";
 
 const Form = () => {
   const initialValues = {
     username: "",
-    email: "",
     password: "",
+    email: "",
     confirm_password: "",
   };
-
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: registrationSchema,
-    onSubmit: (values) => {
-      //code to handle on submit
+    validationSchema: validateRegistration,
+    onSubmit: (value, action) => {
+      console.log(value);
+      action.resetForm();
     },
   });
 
   return (
     <>
-      <div className=".body">
-        <div class="form-container">
-          <h2>Registration Form</h2>
+      <div class="body">
+        <div class="container">
+          <h2>Register</h2>
           <form onSubmit={formik.handleSubmit}>
             <label for="username">Username</label>
             <input
@@ -31,10 +31,10 @@ const Form = () => {
               name="username"
               autoComplete="off"
               value={formik.values.username}
-              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
             />
-            {formik.errors.username && formik.touched ? (
+            {formik.errors.username && formik.touched.username ? (
               <p>{formik.errors.username}</p>
             ) : null}
 
@@ -45,8 +45,8 @@ const Form = () => {
               name="email"
               autoComplete="off"
               value={formik.values.email}
-              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
             />
             {formik.errors.email && formik.touched.email ? (
               <p>{formik.errors.email}</p>
@@ -59,8 +59,8 @@ const Form = () => {
               name="password"
               autoComplete="off"
               value={formik.values.password}
-              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
             />
             {formik.errors.password && formik.touched.password ? (
               <p>{formik.errors.password}</p>
@@ -72,8 +72,8 @@ const Form = () => {
               name="confirm_password"
               autoComplete="off"
               value={formik.values.confirm_password}
-              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
             />
             {formik.errors.confirm_password &&
             formik.touched.confirm_password ? (
